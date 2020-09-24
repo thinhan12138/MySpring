@@ -5,5 +5,6 @@ import com.xh.entity.User;
 import java.util.List;
 
 public interface UserMapper {
-    public List<User> getUserList();
+    List<User> getUserList();
+    void addUser(User user);
 }

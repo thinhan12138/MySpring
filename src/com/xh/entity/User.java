@@ -9,6 +9,16 @@ public class User {
 
     private Integer roleId;
 
+    public User() {
+    }
+
+    public User(Integer userId, String userName, String userPhone, Integer roleId) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userPhone = userPhone;
+        this.roleId = roleId;
+    }
+
     public Integer getUserId() {
         return userId;
     }

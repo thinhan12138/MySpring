@@ -12,6 +12,9 @@ import java.io.Reader;
 import java.util.List;
 
 public class MybatisTest {
+
+    private static SqlSessionFactory sqlSessionFactory;
+
     public static void main(String[] args) {
         String resource = "mybatis-config.xml";
         Reader reader = null;
@@ -20,14 +23,30 @@ public class MybatisTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-        SqlSession session = sqlSessionFactory.openSession();
-        getUserList(session);
+        sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+
+        getUserList();
+        addUser();
     }
 
-    public static void getUserList(SqlSession session){
+    public static void getUserList(){
+        SqlSession session = sqlSessionFactory.openSession();
         UserMapper userMapper = session.getMapper(UserMapper.class);
         List<User> userList = userMapper.getUserList();
         userList.stream().forEach(System.out::println);
+        session.close();
+    }
+
+    public static void addUser(){
+        SqlSession session = sqlSessionFactory.openSession();
+        User user = new User();
+        user.setUserId(2);
+        user.setUserName("test1");
+        user.setUserPhone("15912345678");
+        user.setRoleId(1);
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        userMapper.addUser(user);
+        session.commit();
+        session.close();
     }
 }

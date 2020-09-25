@@ -15,8 +15,8 @@
     </select>
 
     <insert id="addUser" parameterType="com.xh.entity.User">
-        insert into base_user(user_id, user_name, user_phone, role_id)
-        values(#{userId}, #{userName}, #{userPhone}, #{roleId})
+        insert into base_user(user_name, user_phone, role_id)
+        values(#{userName}, #{userPhone}, #{roleId})
     </insert>
 
 </mapper>
